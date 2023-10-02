@@ -7,22 +7,29 @@ android {
     compileSdk 33
 
     defaultConfig {
-        applicationId "cz.muni.fi.is_muni"
         minSdk 21
         targetSdk 33
-        versionCode 2
-        versionName "2.0"
+        versionCode 6
+        versionName "2.3.0"
 
-        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        applicationId "cz.muni.fi.is_muni"
+        resValue "string", "app_name", "IS MUNI"
+        buildConfigField "String", "PAGE_URL", "\"https://is.muni.cz/auth/\""
+        manifestPlaceholders = [hostName:"is.muni.cz"]
+        archivesBaseName = "is-muni"
     }
 
     buildTypes {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            archivesBaseName = "is-muni"
         }
     }
+
+    buildFeatures {
+        buildConfig = true
+    }
+
     compileOptions {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
@@ -34,5 +41,6 @@ dependencies {
     implementation 'com.google.android.material:material:1.9.0'
     implementation "androidx.swiperefreshlayout:swiperefreshlayout:1.1.0"
 //    implementation 'com.github.delight-im:Android-AdvancedWebView:v3.2.1'
+    // temporary snapshot dependency due to not having the needed feature in stable release
     implementation 'com.github.delight-im:Android-AdvancedWebView:download-manager-request-configurator-SNAPSHOT'
 }
